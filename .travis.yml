@@ -6,7 +6,7 @@ services:
   - docker
 
 install:
-  - docker pull debian:stable-slim
+  - docker pull sinoru/swiftenv:latest
 
 script:
   - docker build -t sinoru/swift .
@@ -14,7 +14,7 @@ script:
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker tag sinoru/swift sinoru/swift:latest
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker tag sinoru/swift sinoru/swift:latest;
     docker push sinoru/swift;
     fi
